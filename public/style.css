@@ -1,0 +1,355 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&family=Roboto:ital,wght@0,300;0,400;0,500;1,400&display=swap");
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #f7fffc;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+.head > h1 {
+  color: white;
+  font-size: 5vw;
+}
+div.img img {
+  height: 100px;
+  background-color: #7a73ff;
+}
+
+.custom-shape-divider-top-1661677276 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: -1;
+}
+
+.custom-shape-divider-top-1661677276 svg {
+  position: relative;
+  display: block;
+  width: calc(148% + 1.3px);
+  height: 265px;
+  z-index: -1;
+}
+
+.custom-shape-divider-top-1661677276 .shape-fill {
+  fill: #7a73ff;
+}
+
+.custom-shape-divider-bottom-1661677437 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  z-index: -1;
+}
+
+.custom-shape-divider-bottom-1661677437 svg {
+  position: relative;
+  display: block;
+  width: calc(148% + 1.3px);
+  height: 265px;
+  z-index: -1;
+}
+
+.custom-shape-divider-bottom-1661677437 .shape-fill {
+  fill: #80e8ff;
+}
+.box-1 {
+  position: absolute;
+  top: 76%;
+  left: 79%;
+  background: #80e8ff;
+  width: 20%;
+  height: 10%;
+  transform: rotate(347deg);
+  transition: 0.2s ease;
+  z-index: -1;
+}
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .box-1 {
+    transform: rotate(337deg);
+  }
+}
+@media screen and (max-width: 600px) {
+  .box-1 {
+    transform: rotate(327deg);
+  }
+}
+.box-2 {
+  position: absolute;
+  top: 72%;
+  left: 2%;
+  background: #7a73ff;
+  width: 20%;
+  height: 4%;
+  transform: rotate(347deg);
+  transition: 0.2s ease;
+  z-index: -1;
+}
+
+.login-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #ffffff;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  height: 77%;
+  width: 40%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 3rem;
+  border-radius: 1vw;
+}
+.nith-img {
+  /* position: relative; */
+  height: 5.5rem;
+  width: 120%;
+  background-color: #7a73ff;
+  /* top: -10%; */
+  margin-top: -10%;
+  margin-left: -10%;
+}
+.login-panel-head {
+  font-size: 1.2vw;
+}
+.panel-head {
+  margin: 2vw 0;
+}
+input {
+  outline: none;
+}
+.Before-FS {
+  width: 95%;
+  border: 1px solid #c2c2c2;
+  height: 5vh;
+  border-radius: 0.5rem;
+  /* margin: 2rem 0.2rem; */
+  padding: 1rem;
+  transition: 0.1s ease-out;
+}
+.Before-FS:focus {
+  border: 2px solid #7a73ff;
+}
+label {
+  /* display: block; */
+  font-size: 1.3vw;
+}
+.Fieldset {
+  margin: 5vh 0;
+}
+
+label {
+  margin-bottom: 2vh;
+  margin-left: 0.3em;
+  display: block;
+  cursor: pointer;
+}
+.password-label-section {
+  display: flex;
+  width: 95%;
+  justify-content: space-between;
+}
+div.forget-password > a {
+  color: #7a73ff;
+  text-decoration: none;
+  font-weight: 530;
+  font-size: 1vw;
+}
+div.btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  align-items: center;
+  background: #7a73ff;
+  border-radius: 40px;
+  box-shadow: 0 14px 28px rgba(122, 115, 255, 0.25),
+    0 10px 10px rgba(122, 115, 255, 0.22);
+  display: flex;
+  height: 10vh;
+  justify-content: center;
+  position: relative;
+  width: 14vw;
+}
+.text {
+  color: white;
+  position: absolute;
+  transition: opacity 300ms;
+  user-select: none;
+  -moz-user-select: none;
+}
+.fingerprint {
+  /* height: 80px; */
+  left: -8px;
+  opacity: 0;
+  position: absolute;
+  stroke: #777;
+  top: -7px;
+  transition: opacity 1ms;
+}
+.fingerprint-active {
+  stroke: #fff;
+}
+.fingerprint-out {
+  opacity: 1;
+}
+.odd {
+  stroke-dasharray: 0px 50px;
+  stroke-dashoffset: 1px;
+  transition: stroke-dasharray 1ms;
+}
+.even {
+  stroke-dasharray: 50px 50px;
+  stroke-dashoffset: -41px;
+  transition: stroke-dashoffset 1ms;
+}
+.ok {
+  opacity: 0;
+}
+.active.container {
+  animation: 6s Container;
+}
+.active .text {
+  opacity: 0;
+  animation: 6s Text forwards;
+}
+.active .fingerprint {
+  opacity: 1;
+  transition: opacity 300ms 200ms;
+}
+.active .fingerprint-base .odd {
+  stroke-dasharray: 50px 50px;
+  transition: stroke-dasharray 800ms 100ms;
+}
+.active .fingerprint-base .even {
+  stroke-dashoffset: 0px;
+  transition: stroke-dashoffset 800ms;
+}
+.active .fingerprint-active .odd {
+  stroke-dasharray: 50px 50px;
+  transition: stroke-dasharray 2000ms 1500ms;
+}
+.active .fingerprint-active .even {
+  stroke-dashoffset: 0px;
+  transition: stroke-dashoffset 2000ms 1300ms;
+}
+.active .fingerprint-out {
+  opacity: 0;
+  transition: opacity 300ms 4100ms;
+}
+.active .ok {
+  opacity: 1;
+  animation: 6s Ok forwards;
+}
+@keyframes Container {
+  0% {
+    width: 200px;
+  }
+  6% {
+    width: 80px;
+  }
+  71% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+  77% {
+    transform: scale(1);
+  }
+
+  94% {
+    width: 80px;
+  }
+  100% {
+    width: 200px;
+  }
+}
+@keyframes Text {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  6% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  94% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes Ok {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  77% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  92% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  96% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.wrapper {
+  width: 1600px;
+  height: 30px;
+  margin: auto;
+  border: 4px solid #d9531d;
+  overflow-x: hidden;
+}
+
+.target {
+  font-weight: bold;
+  color: #fbfbfb;
+  animation-name: rightToLeft;
+  animation-duration: 11s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* animation: rightToLeft 4.5s linear infinite; */
+}
+
+@keyframes rightToLeft {
+  0% {
+    transform: translateX(1900px);
+  }
+  100% {
+    transform: translateX(-100px);
+  }
+}

@@ -1,0 +1,75 @@
+body {
+  font-family: "Fondamento", cursive;
+  background-color: rgb(235, 234, 231);
+  background-image: url("https://i.imgur.com/W9YCify.png");
+}
+
+.title {
+  font-size: 4.5em;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 10px;
+  border-bottom: 10px double black;
+}
+
+.date {
+  font: 1em "Roboto Mono", monospace;
+  text-align: center;
+  width: 280px;
+  margin: auto;
+  margin-top: 10px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.columns {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin-top: 10px;
+  border-top: 3px solid black;
+}
+
+.columns > div {
+  flex-grow: 0;
+  flex-basis: 20%;
+  text-align: center;
+  padding: 0 10px;
+}
+
+.columns div p {
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+img {
+  width: 100%;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  image-rendering: pixelated;
+}
+
+.footer {
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 5px 0;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+}
+
+@media only screen and (max-width: 1024px) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .columns > div {
+    padding: 0 10px;
+  }
+}

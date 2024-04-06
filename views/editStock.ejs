@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock edit</title>
+    <style>
+      .fluid-container {
+        margin-right: 30px;
+        margin-left: 30px;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="fluid-container" style="margin-bottom: 10em">
+      <form>
+        <h3>Edit STOCKS here</h3>
+        <hr />
+        <table
+          id="example"
+          class="dataTable table table-hover table-striped"
+          cellspacing="0"
+          width="100%"
+        >
+          <thead>
+            <tr>
+              <th>Sr No.</th>
+              <th></th>
+              <th>Stock Name</th>
+              <th>Stock Number</th>
+              <th>Stock Price</th>
+              <th>Modified Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Not working 🤣</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="1"
+                    value="1"
+                  />
+                </td>
+                <td><%=stocks[2].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Aarti Motors</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="2"
+                    value="2"
+                  />
+                </td>
+                <td><%=stocks[11].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>YTC - Your True Cure</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="3"
+                    value="3"
+                  />
+                </td>
+                <td><%=stocks[3].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Nanosoft</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="4"
+                    value="4"
+                  />
+                </td>
+                <td><%=stocks[4].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Devil Labs: Steals your life from the devil</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="5"
+                    value="5"
+                  />
+                </td>
+                <td><%=stocks[5].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Getflix: Get your net and chill</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="6"
+                    value="6"
+                  />
+                </td>
+                <td><%=stocks[6].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>AATA Steel: Steel need not be hard</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="7"
+                    value="7"
+                  />
+                </td>
+                <td><%=stocks[7].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Freeliance</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="8"
+                    value="8"
+                  />
+                </td>
+                <td><%=stocks[8].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Titanic inc.</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="9"
+                    value="9"
+                  />
+                </td>
+                <td><%=stocks[9].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>Badani</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="10"
+                    value="10"
+                  />
+                </td>
+                <td><%=stocks[10].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+            <tr>
+              <form action="/Matcom@Stock123456Admin/test3" method="POST">
+                <td></td>
+                <td><input type="checkbox" name="Id" value="111" /></td>
+                <td>UEPD</td>
+                <td>
+                  <label for="stockNum"></label>
+                  <input
+                    id="stockNum"
+                    name="stockNum"
+                    placeholder="11"
+                    value="1"
+                  />
+                </td>
+                <td><%=stocks[2].price%></td>
+
+                <td>
+                  <label for="price"></label>
+                  <input type="number" id="price" name="price" />
+                </td>
+                <td><button type="submit">Edit</button></td>
+              </form>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+      <br />
+
+      <br />
+    </div>
+  </body>
+</html>

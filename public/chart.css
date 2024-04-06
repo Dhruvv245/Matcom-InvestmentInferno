@@ -1,0 +1,11 @@
+#chartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  #chart {
+    width: 800px;
+    height: 600px;
+  }

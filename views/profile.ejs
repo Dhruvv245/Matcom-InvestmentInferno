@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="profile.css" />
+    <title>Profile</title>
+  </head>
+  <body>
+    <div class="video-bg">
+      <video width="320" height="240" autoplay loop muted>
+        <source
+          src="https://assets.codepen.io/3364143/7btrrd.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="app">
+      <div class="header">
+        <div class="menu-circle"></div>
+        <div class="header-menu">
+          <a class="menu-link is-active" href="#">Investment</a>
+          <a class="menu-link notify" href="#">Inferno</a>
+        </div>
+
+        <div class="header-profile">
+          <div class="notification">
+            <!-- <span class="notification-number">3</span> -->
+            <!-- <svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-bell"
+            >
+              <path
+                d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"
+              />
+            </svg> -->
+          </div>
+          <svg viewBox="0 0 512 512" fill="currentColor">
+            <path
+              d="M448.773 235.551A135.893 135.893 0 00451 211c0-74.443-60.557-135-135-135-47.52 0-91.567 25.313-115.766 65.537-32.666-10.59-66.182-6.049-93.794 12.979-27.612 19.013-44.092 49.116-45.425 82.031C24.716 253.788 0 290.497 0 331c0 7.031 1.703 13.887 3.006 20.537l.015.015C12.719 400.492 56.034 436 106 436h300c57.891 0 106-47.109 106-105 0-40.942-25.053-77.798-63.227-95.449z"
+            />
+          </svg>
+          <img class="profile-img" src="/logoWhite.png" alt="" />
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="left-side">
+          <div class="side-wrapper">
+            <div class="side-title">Profile</div>
+            <div class="side-menu">
+              <a href="#">
+                <svg viewBox="0 0 512 512">
+                  <g xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path
+                      d="M0 0h128v128H0zm0 0M192 0h128v128H192zm0 0M384 0h128v128H384zm0 0M0 192h128v128H0zm0 0"
+                      data-original="#bfc9d1"
+                    />
+                  </g>
+                  <path
+                    xmlns="http://www.w3.org/2000/svg"
+                    d="M192 192h128v128H192zm0 0"
+                    fill="currentColor"
+                    data-original="#82b1ff"
+                  />
+                  <path
+                    xmlns="http://www.w3.org/2000/svg"
+                    d="M384 192h128v128H384zm0 0M0 384h128v128H0zm0 0M192 384h128v128H192zm0 0M384 384h128v128H384zm0 0"
+                    fill="currentColor"
+                    data-original="#bfc9d1"
+                  />
+                </svg>
+                Profile
+              </a>
+              <a href="/stock-list">
+                <svg viewBox="0 0 488.932 488.932" fill="currentColor">
+                  <path
+                    d="M243.158 61.361v-57.6c0-3.2 4-4.9 6.7-2.9l118.4 87c2 1.5 2 4.4 0 5.9l-118.4 87c-2.7 2-6.7.2-6.7-2.9v-57.5c-87.8 1.4-158.1 76-152.1 165.4 5.1 76.8 67.7 139.1 144.5 144 81.4 5.2 150.6-53 163-129.9 2.3-14.3 14.7-24.7 29.2-24.7 17.9 0 31.8 15.9 29 33.5-17.4 109.7-118.5 192-235.7 178.9-98-11-176.7-89.4-187.8-187.4-14.7-128.2 84.9-237.4 209.9-238.8z"
+                  />
+                </svg>
+                Stock-List
+                <span class="notification-number updates"
+                  ><svg viewBox="0 0 512 512" fill="currentColor">
+                    <path
+                      d="M467 0H45C20.186 0 0 20.186 0 45v422c0 24.814 20.186 45 45 45h422c24.814 0 45-20.186 45-45V45c0-24.814-20.186-45-45-45zM181 241c41.353 0 75 33.647 75 75s-33.647 75-75 75-75-33.647-75-75c0-8.291 6.709-15 15-15s15 6.709 15 15c0 24.814 20.186 45 45 45s45-20.186 45-45-20.186-45-45-45c-41.353 0-75-33.647-75-75s33.647-75 75-75 75 33.647 75 75c0 8.291-6.709 15-15 15s-15-6.709-15-15c0-24.814-20.186-45-45-45s-45 20.186-45 45 20.186 45 45 45zm180 120h30c8.291 0 15 6.709 15 15s-6.709 15-15 15h-30c-24.814 0-45-20.186-45-45V211h-15c-8.291 0-15-6.709-15-15s6.709-15 15-15h15v-45c0-8.291 6.709-15 15-15s15 6.709 15 15v45h45c8.291 0 15 6.709 15 15s-6.709 15-15 15h-45v135c0 8.276 6.724 15 15 15z"
+                    /></svg
+                ></span>
+              </a>
+            </div>
+          </div>
+          <div class="side-wrapper">
+            <div class="side-title"></div>
+            <div class="side-menu">
+              <a href="#">
+                <svg viewBox="0 0 511.441 511.441" fill="currentColor">
+                  <path
+                    d="M255.721 347.484L90.22 266.751v106.57l165.51 73.503 165.509-73.503V266.742z"
+                  />
+                  <path
+                    d="M511.441 189.361L255.721 64.617 0 189.361l255.721 124.744 195.522-95.378v111.032h30V204.092z"
+                  />
+                </svg>
+                Nimbus
+              </a>
+              <a href="#">
+                <svg viewBox="0 0 512 512" fill="currentColor">
+                  <circle
+                    cx="295.099"
+                    cy="327.254"
+                    r="110.96"
+                    transform="rotate(-45 295.062 327.332)"
+                  />
+                  <path
+                    d="M471.854 338.281V163.146H296.72v41.169a123.1 123.1 0 01121.339 122.939c0 3.717-.176 7.393-.5 11.027zM172.14 327.254a123.16 123.16 0 01100.59-120.915L195.082 73.786 40.146 338.281H172.64c-.325-3.634-.5-7.31-.5-11.027z"
+                  />
+                </svg>
+                Computer Vision
+              </a>
+              <a href="#">
+                <svg viewBox="0 0 58 58" fill="currentColor">
+                  <path
+                    d="M57 6H1a1 1 0 00-1 1v44a1 1 0 001 1h56a1 1 0 001-1V7a1 1 0 00-1-1zM10 50H2v-9h8v9zm0-11H2v-9h8v9zm0-11H2v-9h8v9zm0-11H2V8h8v9zm26.537 12.844l-11 7a1.007 1.007 0 01-1.018.033A1.001 1.001 0 0124 36V22a1.001 1.001 0 011.538-.844l11 7a1.003 1.003 0 01-.001 1.688zM56 50h-8v-9h8v9zm0-11h-8v-9h8v9zm0-11h-8v-9h8v9zm0-11h-8V8h8v9z"
+                  />
+                </svg>
+                Research
+              </a>
+              <a href="#">
+                <svg viewBox="0 0 512 512" fill="currentColor">
+                  <path
+                    d="M499.377 46.402c-8.014-8.006-18.662-12.485-29.985-12.613a41.13 41.13 0 00-.496-.003c-11.142 0-21.698 4.229-29.771 11.945L198.872 275.458c25.716 6.555 47.683 23.057 62.044 47.196a113.544 113.544 0 0110.453 23.179L500.06 106.661C507.759 98.604 512 88.031 512 76.89c0-11.507-4.478-22.33-12.623-30.488zM176.588 302.344a86.035 86.035 0 00-3.626-.076c-20.273 0-40.381 7.05-56.784 18.851-19.772 14.225-27.656 34.656-42.174 53.27C55.8 397.728 27.795 409.14 0 416.923c16.187 42.781 76.32 60.297 115.752 61.24 1.416.034 2.839.051 4.273.051 44.646 0 97.233-16.594 118.755-60.522 23.628-48.224-5.496-112.975-62.192-115.348z"
+                  />
+                </svg>
+                Innovation
+              </a>
+              <a href="#">
+                <svg viewBox="0 0 512 512" fill="currentColor">
+                  <path
+                    d="M497 151H316c-8.401 0-15 6.599-15 15v300c0 8.401 6.599 15 15 15h181c8.401 0 15-6.599 15-15V166c0-8.401-6.599-15-15-15zm-76 270h-30c-8.401 0-15-6.599-15-15s6.599-15 15-15h30c8.401 0 15 6.599 15 15s-6.599 15-15 15zm0-180h-30c-8.401 0-15-6.599-15-15s6.599-15 15-15h30c8.401 0 15 6.599 15 15s-6.599 15-15 15z"
+                  />
+                  <path
+                    d="M15 331h196v60h-75c-8.291 0-15 6.709-15 15s6.709 15 15 15h135v-30h-30v-60h30V166c0-24.814 20.186-45 45-45h135V46c0-8.284-6.716-15-15-15H15C6.716 31 0 37.716 0 46v270c0 8.284 6.716 15 15 15z"
+                  />
+                </svg>
+                Web
+              </a>
+              <a href="#">
+                <svg viewBox="0 0 512 512" fill="currentColor">
+                  <path
+                    d="M0 331v112.295a14.996 14.996 0 007.559 13.023L106 512V391L0 331zM136 391v121l105-60V331zM271 331v121l105 60V391zM406 391v121l98.441-55.682A14.995 14.995 0 00512 443.296V331l-106 60zM391 241l-115.754 57.876L391 365.026l116.754-66.15zM262.709 1.583a15.006 15.006 0 00-13.418 0L140.246 57.876 256 124.026l115.754-66.151L262.709 1.583zM136 90v124.955l105 52.5V150zM121 241L4.246 298.876 121 365.026l115.754-66.15zM271 150v117.455l105-52.5V90z"
+                  />
+                </svg>
+                3D/AR
+              </a>
+            </div>
+          </div>
+          <div class="side-wrapper">
+            <div class="side-title">Finance</div>
+            <div class="side-menu">
+              <a href="#">
+                <svg viewBox="0 0 332 332" fill="currentColor">
+                  <path
+                    d="M282.341 8.283C275.765 2.705 266.211 0 253.103 0c-18.951 0-36.359 5.634-51.756 16.743-14.972 10.794-29.274 28.637-42.482 53.028-4.358 7.993-7.428 11.041-8.973 12.179h-26.255c-10.84 0-19.626 8.786-19.626 19.626 0 8.989 6.077 16.486 14.323 18.809l-.05.165h.589c1.531.385 3.109.651 4.757.651h18.833l-32.688 128.001c-7.208 27.848-10.323 37.782-11.666 41.24-1.445 3.711-3.266 7.062-5.542 10.135-.42-5.39-2.637-10.143-6.508-13.854-4.264-4.079-10.109-6.136-17.364-6.136-8.227 0-15.08 2.433-20.37 7.229-5.416 4.93-8.283 11.193-8.283 18.134 0 5.157 1.701 12.712 9.828 19.348 6.139 4.97 14.845 7.382 26.621 7.382 17.096 0 32.541-4.568 45.891-13.577 13.112-8.845 24.612-22.489 34.166-40.522 9.391-17.678 18.696-45.124 28.427-83.9l18.598-73.479h30.016c10.841 0 19.625-8.785 19.625-19.625s-8.784-19.626-19.625-19.626h-19.628c6.34-21.62 14.175-37.948 23.443-48.578 2.284-2.695 5.246-5.692 8.412-7.678-1.543 3.392-2.325 6.767-2.325 10.055 0 6.164 2.409 11.714 6.909 16.03 4.484 4.336 10.167 6.54 16.888 6.54 7.085 0 13.373-2.667 18.17-7.716 4.76-5.005 7.185-11.633 7.185-19.703.017-9.079-3.554-16.899-10.302-22.618z"
+                  />
+                </svg>
+                Finance
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="main-container">
+          <div class="main-header">
+            <a class="menu-link-main" href="#">User Profile</a>
+            <div class="header-menu">
+              <a class="main-header-link is-active" href="/stock-list"
+                >Stock-list</a
+              >
+              <a class="main-header-link" href="#">Stocks</a>
+              <a class="main-header-link" href="#">Web</a>
+            </div>
+          </div>
+          <div class="content-wrapper">
+            <div class="content-wrapper-header">
+              <div class="content-wrapper-context">
+                <h3 class="img-content">
+                  <!-- <svg viewBox="0 0 512 512">
+                    <path
+                      d="M467 0H45C20.099 0 0 20.099 0 45v422c0 24.901 20.099 45 45 45h422c24.901 0 45-20.099 45-45V45c0-24.901-20.099-45-45-45z"
+                      fill="#d6355b"
+                      data-original="#ff468c"
+                    />
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M512 45v422c0 24.901-20.099 45-45 45H256V0h211c24.901 0 45 20.099 45 45z"
+                      fill="#d6355b"
+                      data-original="#d72878"
+                    />
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M467 30H45c-8.401 0-15 6.599-15 15v422c0 8.401 6.599 15 15 15h422c8.401 0 15-6.599 15-15V45c0-8.401-6.599-15-15-15z"
+                      fill="#2e000a"
+                      data-original="#700029"
+                    />
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M482 45v422c0 8.401-6.599 15-15 15H256V30h211c8.401 0 15 6.599 15 15z"
+                      fill="#2e000a"
+                      data-original="#4d0e06"
+                    />
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M181 391c-41.353 0-75-33.647-75-75 0-8.291 6.709-15 15-15s15 6.709 15 15c0 24.814 20.186 45 45 45s45-20.186 45-45-20.186-45-45-45c-41.353 0-75-33.647-75-75s33.647-75 75-75 75 33.647 75 75c0 8.291-6.709 15-15 15s-15-6.709-15-15c0-24.814-20.186-45-45-45s-45 20.186-45 45 20.186 45 45 45c41.353 0 75 33.647 75 75s-33.647 75-75 75z"
+                      fill="#d6355b"
+                      data-original="#ff468c"
+                    />
+                    <path
+                      xmlns="http://www.w3.org/2000/svg"
+                      d="M391 361h-30c-8.276 0-15-6.724-15-15V211h45c8.291 0 15-6.709 15-15s-6.709-15-15-15h-45v-45c0-8.291-6.709-15-15-15s-15 6.709-15 15v45h-15c-8.291 0-15 6.709-15 15s6.709 15 15 15h15v135c0 24.814 20.186 45 45 45h30c8.291 0 15-6.709 15-15s-6.709-15-15-15z"
+                      fill="#d6355b"
+                      data-original="#d72878"
+                    />
+                  </svg> -->
+                  Team MATCOM
+                </h3>
+                <div class="content-text">
+                  This is your profile portfolio, listing your stocks and your
+                  monetary assets
+                </div>
+                <button class="content-button">
+                  <a href="/stock-list">BUY-SELL STOCKS HERE</a>
+                </button>
+              </div>
+              <img class="content-wrapper-img" src="/logoWhite.png" alt="" />
+            </div>
+            <div class="content-section">
+              <div class="content-section-title"><%=data.name%></div>
+              <ul>
+                <li class="adobe-product">
+                  <svg
+                    style="color: white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-capslock"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M7.27 1.047a1 1 0 0 1 1.46 0l6.345 6.77c.6.638.146 1.683-.73 1.683H11.5v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1H1.654C.78 9.5.326 8.455.924 7.816L7.27 1.047zM14.346 8.5 8 1.731 1.654 8.5H4.5a1 1 0 0 1 1 1v1h5v-1a1 1 0 0 1 1-1h2.846zm-9.846 5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-1zm6 0h-5v1h5v-1z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                  <div class="products">Amount</div>
+                  <span class="status">
+                    <span class="status-circle green"></span>
+                    &#8377; <%=data.amount%></span
+                  >
+                  <div class="button-wrapper">
+                    <button class="content-button status-button">
+                      Total Amount &#8377;<%=data.totalAmount%>
+                    </button>
+                  </div>
+                </li>
+                <li class="adobe-product">
+                  <div class="products">
+                    <svg
+                      style="color: white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-activity"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"
+                        fill="white"
+                      ></path></svg
+                    ><%if(pl2>0) { %> Profit <% }else{%> Loss <% }%>
+                  </div>
+
+                  <span class="status">
+                    <span class="status-circle"></span>
+
+                    <%=pl%> &percnt;</span
+                  >
+
+                  <div class="button-wrapper">
+                    <button class="content-button status-button">
+                      <%=pl%> &percnt;
+                    </button>
+                  </div>
+                </li>
+                <li class="adobe-product">
+                  <div class="products">
+                    <svg
+                      style="color: white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-archive"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"
+                        fill="white"
+                      ></path>
+                    </svg>
+                    No. of Stocks
+                  </div>
+                  <span class="status">
+                    <span class="status-circle green"></span>
+                    <%=stocks%> Stocks
+                  </span>
+                  <div class="button-wrapper">
+                    <button class="content-button status-button">
+                      <%=stocks%> Stocks
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="content-section">
+              <div class="content-section-title">Stocks in your Portfolio</div>
+              <div class="apps-card">
+                <%if(data.userstock?.stocks.length!=0) {for(let stock of datas)
+                {%>
+                <div class="app-card">
+                  <span>
+                    <svg
+                      style="color: white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-app-indicator"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"
+                        fill="white"
+                      ></path>
+                      <path
+                        d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
+                        fill="white"
+                      ></path>
+                    </svg>
+                    <%=stock?.stockid?.name%>
+                  </span>
+                  <div class="app-card__subtext">
+                    &#8377; <%=stock?.stockid?.price%>
+                  </div>
+                  <div class="app-card__subtext">
+                    Quantity:- <%=stock?.quantity%>
+                  </div>
+                  <div class="app-card-buttons">
+                    <button class="content-button status-button">
+                      <a href="/stock/<%=stock?.stockid?.stockNum%>"
+                        >More Info</a
+                      >
+                    </button>
+                    <div class="menu"></div>
+                  </div>
+                </div>
+                <% }}%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="overlay-app"></div>
+    </div>
+    <script src="profile.js"></script>
+  </body>
+</html>

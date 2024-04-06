@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/individual.css" />
+    <title>Stock</title>
+  </head>
+  <body>
+    <div class="title">MATCOM Times</div>
+    <div class="date"><%=date%></div>
+    
+    <div class="columns">
+      <div>
+        <h1><%=data.name%></h1>
+        <p><%=data.description%></p>
+      
+        <img src="/logo.png">
+      </div>
+      <hr>
+      <div>
+        <h1>A Stock a Day, Keeps Bankruptcy away!</h1>
+        <%if(data.message)  {%>
+        <h2>Message:- <br/><h3>"<%=data.message%>"</h3></h2>
+        <% }else{%>
+          <h3>"KEEP LOOKING FOR UPDATES ON THIS STOCK HERE"</h3>
+          <% }%>
+      </div>
+      <hr>
+      <h2>Current Price:-<br/> <div id="price"> <%=data.price%></div> </h2>
+      <hr>
+    
+      <div class="date">
+        
+        <form action="/stock/<%=data.stockNum%>" method="POST">
+          <div class="group">
+            <input type="number" name="quantity" id="quantity" /><span
+              class="highlight"
+            ></span
+            ><span class="bar"></span>
+            <label>Quantity</label>
+          </div>
+      
+          <button type="submit" class="button buttonBlue">
+           BUY
+            <div class="ripples buttonRipples">
+              <span class="ripplesCircle"></span>
+            </div>
+          </button>
+        </form>
+        <h2><a href="/stock/chart/<%= num %>">See Chart</a></h2>
+      </div>
+      <br/>
+      <div class="date">
+        <form action="/stock2/<%=data.stockNum%>" method="POST">
+          <div class="group">
+            <input type="number" name="quantity" id="quantity" /><span
+              class="highlight"
+            ></span
+            ><span class="bar"></span>
+            <label>Quantity</label>
+          </div>
+         
+          <button type="submit" class="button buttonBlue">
+            SELL
+            <div class="ripples buttonRipples">
+              <span class="ripplesCircle"></span>
+            </div>
+          </button>
+        </form>
+        <h2>Your STOCKS:-</h2> 
+      <%if(stocks.length!=0) {for(let i=0; i<stocks.length; i++) 
+       
+        {%>
+          <br/><p><a href="/stock/<%=stocks[i].stockNum%>"><%=stocks[i].name%></a></p><p>Price:- <%=stocks[i].price%></p><p>Quantity:- <%=stocks[i].quantity%></p>
+          <% }}%><br/>
+      </div>
+      
+      
+    </div>
+    <div class="footer">MATCOM Times</div>
+    </body>
+    <script src="/individual.js"></script>
+  </body>
+</html>
