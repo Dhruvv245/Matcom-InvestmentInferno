@@ -122,8 +122,8 @@ app.get("/profile", stock.profile);
 app.get("/stock-list", stock.stockDataFront);
 
 //individual stocks route
-app.get("/stock/chart/:num",stock.getChart);
-app.get("/stock/:stockid", stock.stockSingle);
+// app.get("/stock/chart/:num",stock.getChart);
+app.get("/stock/:stockid",stock.stockSingle);
 
 //create Stock
 app.post("/createStock", makeStock);

@@ -9,42 +9,86 @@ const date = moment();
 const Student = require("../models/student");
 const Admin = require("../models/admin");
 
+const sentData = {};
+const indices = {};
+const intervals = {};
+
 module.exports.getChart = async (req, res, next) => {
   const io = req.app.get("socketio");
-  const stockNum = req.params.num;
-  const indices = {};
-  const intervals = {};
+
+  const stocks = await Stock.find({});
+  for (let stock of stocks) {
+    const stockNum = stock.stockNum;
+    if (!intervals[stockNum]) {
+      indices[stockNum] = 0;
+      sentData[stockNum] = [];
+      intervals[stockNum] = setInterval(() => {
+        if (indices[stockNum] >= stock.stockdata.length) {
+          clearInterval(intervals[stockNum]);
+          delete intervals[stockNum];
+          return;
+        }
+        const data = stock.stockdata.slice(0, indices[stockNum] + 1);
+        sentData[stockNum] = data;
+        // console.log(`Emitting data for stock ${stockNum}:`, data);
+        io.emit("stockData", { stockNum, data });
+
+        indices[stockNum]++;
+      }, 10000);
+    }
+  }
+
   io.on("connection", (socket) => {
-    socket.on("join", async (data) => {
-      socket.join(data);
-      if (!indices[data]) {
-        indices[data] = 0;
-      }
-      const stock = await Stock.findOne({ stockNum: data });
-      if (!stock) {
-        return;
-      }
-      if (!intervals[data]) {
-        intervals[data] = setInterval(() => {
-          if (indices[data] >= stock.stockdata.length) {
-            clearInterval(intervals[data]);
-            delete intervals[data];
-            return;
-          }
-          io.to(data).emit(
-            "stockData",
-            stock.stockdata.slice(0, indices[data] + 1)
-          );
-          indices[data]++;
-        }, 15000);
+    socket.on("join", (stockNum) => {
+      socket.join(stockNum);
+      if (sentData[stockNum]) {
+        socket.emit("stockData", { stockNum, data: sentData[stockNum] });
       }
     });
   });
-  res.render("chart", {
-    title: "Chart",
-    stockNum,
-  });
+
+  next();
 };
+
+// const indices = {};
+// const intervals = {};
+// module.exports.getChart = async (req, res, next) => {
+//   const io = req.app.get("socketio");
+//   io.on("connection", (socket) => {
+//     socket.on("join", async (data) => {
+//       socket.join(data);
+
+//       const stock = await Stock.findOne({ stockNum: data });
+//       if (!stock) {
+//         return;
+//       }
+
+//       if (!intervals[data]) {
+//         indices[data] = 0;
+//         intervals[data] = setInterval(() => {
+//           if (indices[data] >= stock.stockdata.length) {
+//             clearInterval(intervals[data]);
+//             delete intervals[data];
+//             return;
+//           }
+//           io.to(data).emit(
+//             "stockData",
+//             stock.stockdata.slice(0, indices[data] + 1)
+//           );
+
+//           indices[data]++;
+//         }, 15000);
+//       } else {
+//         socket.emit("stockData", stock.stockdata.slice(0, indices[data] + 1));
+//       }
+//     });
+//   });
+//   next();
+//   // res.render("chart", {
+//   //   title: "Chart",
+//   //   stockNum,
+//   // });
+// };
 
 module.exports.makeStock = async (req, res, next) => {
   // await new Stock({
@@ -102,45 +146,30 @@ module.exports.stockDataFront = async (req, res, next) => {
 
 module.exports.profile = async (req, res) => {
   const user = req.session.StudentId;
-
   const student = await Student.findById(user);
   const leader = await Admin.find();
-  if (!leader.length) {
-    console.log("No leader found");
-    return res.status(404).send("No leader found");
-  }
   const check = leader[0].Start;
   if (student) {
     const stocks = student.userStock.stocks.length;
     const stock = student.userStock.stocks;
-
-    // let newStocks = new Array();
-
-    // stock.map(async (stock, index) => {
-    //   let data = await Stock.findById(stock.stockid);
     let price = 0;
     stock &&
       stock.map((stock) => {
-        return (price = price + stock?.stockid?.price * stock?.quantity);
+        return (price = price + stock.stockid.price * stock.quantity);
       });
-    console.log(price);
     let totalAmount = price + student.amount;
-    await Student.findOneAndUpdate(
-      { _id: student._id },
-      { totalAmount: totalAmount },
-      {
-        new: true,
-        upsert: true, // Make this update into an upsert
-      }
-    )
-      .then((result) => {
-        // console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    // console.log(student.totalAmount);
+    try{
+      await Student.findOneAndUpdate(
+        { _id: student._id },
+        { totalAmount: totalAmount },
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+    }catch(err){
+      console.log(err);
+    }
     pl =
       Math.sqrt(
         (student.amount + price - 20000) * (student.amount + price - 20000)

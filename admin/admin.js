@@ -3,6 +3,7 @@ const router = express.Router();
 const Stock = require("../models/stock");
 const Student = require("../models/student");
 const Admin = require("../models/admin");
+const getChart = require(`../routes/stock`).getChart;
 
 router.route("/test").get(async (req, res) => {
   const stocks = await Stock.find();
@@ -115,7 +116,7 @@ router.route("/test6").get(async (req, res) => {
     });
 });
 
-router.route("/test7").get(async (req, res) => {
+router.route("/test7").get(getChart,async (req, res) => {
   await Admin.findOneAndUpdate(
     { _id: "6431cd246b8a210baa7d1fe0" },
     { Start: true },

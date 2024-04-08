@@ -20,16 +20,15 @@
       </div>
       <hr>
       <div>
-        <h1>A Stock a Day, Keeps Bankruptcy away!</h1>
-        <%if(data.message)  {%>
-        <h2>Message:- <br/><h3>"<%=data.message%>"</h3></h2>
-        <% }else{%>
-          <h3>"KEEP LOOKING FOR UPDATES ON THIS STOCK HERE"</h3>
-          <% }%>
+        <div id="chartContainer" data-stocknum="<%= num %>">
+          <div id="chart"></div>
+          <button id="sma-button">SMA</button>
+          <button id="ema-button">EMA</button>
+          <button id="rsi-button">RSI</button>
+          <button id="macd-button">MACD</button>
+        </div>
       </div>
-      <hr>
-      <h2>Current Price:-<br/> <div id="price"> <%=data.price%></div> </h2>
-      <hr>
+
     
       <div class="date">
         
@@ -49,7 +48,9 @@
             </div>
           </button>
         </form>
-        <h2><a href="/stock/chart/<%= num %>">See Chart</a></h2>
+        <hr>
+        <h2>Current Price:-<br/> <div id="price"> <%=data.price%></div> </h2>
+        <hr>
       </div>
       <br/>
       <div class="date">
@@ -77,10 +78,10 @@
           <% }}%><br/>
       </div>
       
-      
     </div>
     <div class="footer">MATCOM Times</div>
     </body>
     <script src="/individual.js"></script>
+    <script src="/bundle.js"></script>
   </body>
 </html>
