@@ -15,6 +15,7 @@ const indices = {};
 const intervals = {};
 
 module.exports.getChart = async (req, res, next) => {
+  console.log("route hitted");
   const io = req.app.get("socketio");
   const stocks = await Stock.find();
   for (let stock of stocks) {
@@ -33,7 +34,7 @@ module.exports.getChart = async (req, res, next) => {
         const latestClosePrice = data[data.length - 1].CLOSE;
         await Stock.updateOne({ stockNum }, { price: latestClosePrice });
         io.emit("stockData", { stockNum, data });
-
+        console.log("data sent", { stockNum, data });
         indices[stockNum]++;
       }, 10000);
     }
@@ -154,6 +155,11 @@ module.exports.stockSingle = async (req, res, next) => {
       const currentDate = date.format("dddd, MMMM Do YYYY");
 
       const stock = await Stock.find({ stockNum: req.params.stockid });
+      console.log(
+        "checking stock",
+        oldStock.stockdata[0],
+        oldStock.stockdata[oldStock.stockdata.length - 1].CLOSE
+      );
       const student = await Student.findById(user);
       const stocks = student.userStock.stocks;
       if (check) {
@@ -163,6 +169,7 @@ module.exports.stockSingle = async (req, res, next) => {
           stocks: stocks,
           num: req.params.stockid,
           oldData,
+          initialPrice: oldStock.stockdata[oldStock.stockdata.length - 1].CLOSE,
         });
       } else {
         res.render("start");

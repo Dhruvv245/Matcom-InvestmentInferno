@@ -10,7 +10,7 @@ const port = process.env.PORT || 8080;
 const path = require("path");
 const mongoose = require("mongoose");
 const Stock = require("./models/stock");
-const User = require("./models/student")
+const User = require("./models/student");
 const stock = require("./routes/stock");
 const login = require("./routes/login");
 const userStock = require("./routes/user-stock");
@@ -138,7 +138,7 @@ app.get("/profile", stock.profile);
 app.get("/stock-list", stock.stockDataFront);
 
 //individual stocks route
-// app.get("/stock/chart/:num",stock.getChart);
+app.get("/stock/chart/:num", stock.getChart);
 app.get("/stock/:stockid", stock.stockSingle);
 
 //create Stock
