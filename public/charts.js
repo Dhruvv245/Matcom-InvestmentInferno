@@ -1,6 +1,8 @@
 import "@babel/polyfill";
 import { createChart, CrosshairMode } from "lightweight-charts";
 import io from "socket.io-client";
+import  axios  from 'axios';
+
 
 function calculateSMA(data, windowSize) {
   let rAvg = [];
@@ -192,4 +194,24 @@ socket.on("stockData", (data) => {
     document.getElementById(`price`).innerText =
       newData[newData.length - 1].close;
   }
+});
+
+socket.on("message", (data) => {
+  console.log(data.data);
+  document.getElementById("message-content").innerText = data.data.message;
+})
+
+document.getElementById("buy-tip").addEventListener('click', async () => {
+  await axios({
+    method: 'PATCH',
+    url: `http://localhost:8080/stock/tips/`,
+  });
+  console.log("hello");
+  document.getElementById("tips-button").style.display = "none";
+  document.getElementById("tip-message").style.display = "block";
+
+  setTimeout(() => {
+    document.getElementById("tip-message").style.display = "none";
+    document.getElementById("tips-button").style.display = "block";
+  }, 5000);
 });

@@ -10,6 +10,7 @@ const port = process.env.PORT || 8080;
 const path = require("path");
 const mongoose = require("mongoose");
 const Stock = require("./models/stock");
+const User = require("./models/student")
 const stock = require("./routes/stock");
 const login = require("./routes/login");
 const userStock = require("./routes/user-stock");
@@ -66,6 +67,9 @@ const stockPrice = () => {
 };
 
 const check = stockPrice();
+const server = http.createServer(app);
+const io = new Server(server);
+app.set("socketio", io);
 
 console.log(check);
 
@@ -95,12 +99,12 @@ app.use("/Matcom@Stock123456Admin", admin);
 
 //Old data create
 app.get(`/oldStock/:num`, async (req, res) => {
-  try{
-    const stock = await OldStockData.findOne({stockNum: req.params.num});
+  try {
+    const stock = await OldStockData.findOne({ stockNum: req.params.num });
     res.status(201).json({
       stock,
     });
-  }catch(err){
+  } catch (err) {
     console.log(err);
   }
 });
@@ -135,7 +139,7 @@ app.get("/stock-list", stock.stockDataFront);
 
 //individual stocks route
 // app.get("/stock/chart/:num",stock.getChart);
-app.get("/stock/:stockid",stock.stockSingle);
+app.get("/stock/:stockid", stock.stockSingle);
 
 //create Stock
 app.post("/createStock", makeStock);
@@ -162,10 +166,29 @@ app.get("/stock-api", async (req, res) => {
       console.log(err);
     });
 });
+app.patch("/stock/tips", async (req, res) => {
+  const userId = req.session.StudentId;
+  if (userId) {
+    const user = await User.findById({ _id: userId });
+    if (user.amount < 1000) {
+      io.emit("message", {
+        data: { message: "You Don't Have Enough Money For This Service" },
+      });
+      // res.render("error");
+      console.log("hello");
+      res.redirect("/individual-stock");
+      return;
+    } else {
+      const updatedUser = await User.findByIdAndUpdate(
+        { _id: userId },
+        { amount: user.amount - 1000 },
+        { new: true }
+      );
+      res.redirect("/individual-stock");
+    }
+  }
+});
 
-const server = http.createServer(app);
-const io = new Server(server);
-app.set("socketio", io);
 mongoose
   .connect(MONGODB_URI)
   .then(async (result) => {
