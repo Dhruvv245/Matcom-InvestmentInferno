@@ -10,7 +10,6 @@ const port = process.env.PORT || 8080;
 const path = require("path");
 const mongoose = require("mongoose");
 const Stock = require("./models/stock");
-const OldStockData = require("./models/oldStockData");
 const stock = require("./routes/stock");
 const login = require("./routes/login");
 const userStock = require("./routes/user-stock");
