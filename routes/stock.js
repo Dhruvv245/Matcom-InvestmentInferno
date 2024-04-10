@@ -59,7 +59,6 @@ module.exports.makeStock = async (req, res, next) => {
 
   try {
     const data = req.body;
-    console.log(data);
     const newStock = await Stock.create(data);
     res.status(201).send(newStock);
   } catch (error) {

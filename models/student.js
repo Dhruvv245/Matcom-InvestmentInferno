@@ -7,13 +7,13 @@ const StudentSchema = new Schema({
   totalAmount: {
     type: Number,
 
-    default: 20000,
+    default: 200000,
   },
   password: String,
   amount: {
     type: Number,
 
-    default: 20000,
+    default: 200000,
   },
   userStock: {
     stocks: [
