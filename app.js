@@ -10,6 +10,7 @@ const port = process.env.PORT || 8080;
 const path = require("path");
 const mongoose = require("mongoose");
 const Stock = require("./models/stock");
+const User = require("./models/student");
 const stock = require("./routes/stock");
 const login = require("./routes/login");
 const userStock = require("./routes/user-stock");
@@ -66,6 +67,10 @@ const stockPrice = () => {
 };
 
 const check = stockPrice();
+
+const server = http.createServer(app);
+const io = new Server(server);
+app.set("socketio", io);
 
 console.log(check);
 
@@ -128,6 +133,23 @@ app.get("/stock/:stockid",stock.stockSingle);
 //create Stock
 app.post("/createStock", makeStock);
 
+app.patch("/stock/tips",async (req, res) =>{
+  const userId = req.session.StudentId;
+  if(userId){
+    const user = await User.findById({_id: userId});
+    if(user.amount < 1000){
+      io.emit("message", {data : {message: "You Don't Have Enough Money For This Service"}})
+      // res.render("error");
+      console.log("hello");
+      res.redirect("/individual-stock");
+      return;
+    }
+    else{
+      const updatedUser = await User.findByIdAndUpdate({_id: userId},{amount: user.amount-1000}, {new:true});
+      res.redirect("/individual-stock");
+    }
+  }
+})
 //buy-sell logic
 app.post("/stock/:stockid", userStock.buy);
 app.post("/stock2/:stockid", userStock.sell);
@@ -151,9 +173,6 @@ app.get("/stock-api", async (req, res) => {
     });
 });
 
-const server = http.createServer(app);
-const io = new Server(server);
-app.set("socketio", io);
 mongoose
   .connect(MONGODB_URI)
   .then(async (result) => {
