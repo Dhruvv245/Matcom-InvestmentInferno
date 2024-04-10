@@ -122,7 +122,7 @@ app.post(
 );
 
 //register routes
-app.get("/register", (req, res) => {
+app.get("/", (req, res) => {
   res.render("login");
 });
 app.post(
