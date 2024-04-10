@@ -10,6 +10,7 @@ const port = process.env.PORT || 8080;
 const path = require("path");
 const mongoose = require("mongoose");
 const Stock = require("./models/stock");
+const OldStockData = require("./models/oldStockData");
 const stock = require("./routes/stock");
 const login = require("./routes/login");
 const userStock = require("./routes/user-stock");
@@ -93,6 +94,18 @@ app.use(session(sessionConfig));
 
 app.use("/Matcom@Stock123456Admin", admin);
 
+//Old data create
+app.get(`/oldStock/:num`, async (req, res) => {
+  try{
+    const stock = await OldStockData.findOne({stockNum: req.params.num});
+    res.status(201).json({
+      stock,
+    });
+  }catch(err){
+    console.log(err);
+  }
+});
+
 //login routes
 app.get("/login", (req, res) => {
   console.log(req.session);
@@ -165,27 +178,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
-//Chart route
-// let cnt = 0;
-// async function stockData(cnt) {
-//   const stocks = await Stock.find();
-//   const stockData = stocks.map((stock) => stock.stockdata);
-//   const requiredStockData = stockData.map((stock) => {
-//     return stock.filter((data, i) => i < cnt / 15);
-//   });
-//   console.log(requiredStockData);
-//   io.emit("stockData", requiredStockData);
-// }
-
-// setInterval(async () => {
-//   cnt = cnt + 15;
-//   await stockData(cnt);
-//   console.log(cnt);
-// }, 15000);
-// app.get("/chart", (req, res) => {
-//   res.render("charts");
-// });
 
 app.all("*", (req, res, next) => {
   next(res.render("test"));

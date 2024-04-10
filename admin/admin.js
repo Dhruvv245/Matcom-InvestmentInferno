@@ -86,7 +86,7 @@ router.route("/test5").get(async (req, res) => {
     { leader: false },
     {
       new: true,
-      upsert: true, // Make this update into an upsert
+      upsert: true, 
     }
   )
     .then((result) => {
@@ -104,7 +104,7 @@ router.route("/test6").get(async (req, res) => {
     { leader: true },
     {
       new: true,
-      upsert: true, // Make this update into an upsert
+      upsert: true,
     }
   )
     .then((result) => {
@@ -140,7 +140,7 @@ router.route("/test8").get(async (req, res) => {
     { Start: false },
     {
       new: true,
-      upsert: true, // Make this update into an upsert
+      upsert: true,
     }
   )
     .then((result) => {
@@ -158,7 +158,7 @@ router.route("/test9").get(async (req, res) => {
     { Score: true },
     {
       new: true,
-      upsert: true, // Make this update into an upsert
+      upsert: true,
     }
   )
     .then((result) => {
@@ -176,7 +176,7 @@ router.route("/test10").get(async (req, res) => {
     { Score: false },
     {
       new: true,
-      upsert: true, // Make this update into an upsert
+      upsert: true, 
     }
   )
     .then((result) => {

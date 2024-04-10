@@ -19,13 +19,14 @@
         <img src="/logo.png">
       </div>
       <hr>
-      <div>
+      <div id="old" data-olddata="<%= oldData %>">
         <div id="chartContainer" data-stocknum="<%= num %>">
-          <div id="chart"></div>
-          <button id="sma-button">SMA</button>
-          <button id="ema-button">EMA</button>
-          <button id="rsi-button">RSI</button>
-          <button id="macd-button">MACD</button>
+          <div id="chart">
+            <button id="sma-button">SMA</button>
+            <button id="ema-button">EMA</button>
+            <button id="rsi-button">RSI</button>
+            <button id="macd-button">MACD</button>
+          </div>
         </div>
       </div>
 
@@ -74,7 +75,7 @@
       <%if(stocks.length!=0) {for(let i=0; i<stocks.length; i++) 
        
         {%>
-          <br/><p><a href="/stock/<%=stocks[i].stockNum%>"><%=stocks[i].name%></a></p><p>Price:- <%=stocks[i].price%></p><p>Quantity:- <%=stocks[i].quantity%></p>
+          <br/><p><a href="/stock/<%=stocks[i].stockid.stockNum%>"><%=stocks[i].stockid.name%></a></p><p>Quantity:- <%=stocks[i].quantity%></p>
           <% }}%><br/>
       </div>
       

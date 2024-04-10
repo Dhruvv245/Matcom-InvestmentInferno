@@ -40,16 +40,17 @@ module.exports.sell = async (req, res, next) => {
     await Student.findById(user)
       .then(async (result) => {
         const stock = await Stock.findOne({ stockNum: stockNum });
-        console.log("sell");
-
         const stockIndex = result.userStock.stocks.findIndex((cp) => {
           return cp.stockid.stockNum === stockNum;
         });
-
+        if (stockIndex === -1) {
+          res.render("error");
+          return;
+        }
         const quan = result.userStock.stocks[stockIndex].quantity;
         if (quan >= quantity) {
           const amount = result.amount + quantity * stock.price;
-          data = await result.sellStock(stock.stockNum, quantity, amount);
+          let data = await result.sellStock(stock.stockNum, quantity, amount);
           res.redirect("/profile");
         } else {
           res.render("error");

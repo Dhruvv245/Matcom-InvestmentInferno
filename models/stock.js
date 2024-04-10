@@ -10,9 +10,6 @@ const stockSchema = new Schema({
   name: String,
   price: {
     type:Number,
-    get:function(){
-      return this.stockdata[this.stockdata.length-1].CLOSE;
-    }
   },
   description: String,
   message: String,

@@ -1,5 +1,5 @@
 import "@babel/polyfill";
-import { createChart } from "lightweight-charts";
+import { createChart, CrosshairMode } from "lightweight-charts";
 import io from "socket.io-client";
 
 function calculateSMA(data, windowSize) {
@@ -86,6 +86,15 @@ let chart = createChart(document.getElementById("chart"), {
       color: "rgba(197, 203, 206, 0.5)",
     },
   },
+  crosshair: {
+    mode: CrosshairMode.Normal,
+  },
+  rightPriceScale: {
+    borderColor: "rgba(197, 203, 206, 0.8)",
+  },
+  timeScale: {
+    borderColor: "rgba(197, 203, 206, 0.8)",
+  },
 });
 
 let candleSeries = chart.addCandlestickSeries({
@@ -95,13 +104,13 @@ let candleSeries = chart.addCandlestickSeries({
   wickDownColor: "rgba(255, 82, 82, 1)",
 });
 
-let lineSeries = chart.addLineSeries(); // Main chart data series
+let lineSeries = chart.addLineSeries();
 let smaSeries = chart.addLineSeries({
   overlay: true,
   visible: false,
   color: "rgba(4, 111, 232, 1)",
   lineWidth: 2,
-}); // SMA line series
+});
 let emaSeries = chart.addLineSeries({
   overlay: true,
   visible: false,
@@ -136,12 +145,32 @@ document.getElementById("macd-button").addEventListener("click", () => {
   macdSeries.applyOptions({ visible: !macdSeries.options().visible });
 });
 const stockNum = document.getElementById(`chartContainer`).dataset.stocknum;
-socket.emit(`join`, stockNum);
-
+const oldData = document.getElementById(`old`).dataset.olddata;
+const oldDataJson = JSON.parse(oldData);
+const reqOldData = oldDataJson.map((stockData, i) => {
+  const timeInSecondsOld = Math.floor(Date.now() / 1000) + i * 10;
+  return {
+    time: timeInSecondsOld,
+    open: stockData.OPEN,
+    high: stockData.HIGH,
+    low: stockData.LOW,
+    close: stockData.CLOSE,
+  };
+});
+const smaData = calculateSMA(reqOldData, 14);
+const emaData = calculateEMA(reqOldData, 14);
+const rsiData = calculateRSI(reqOldData, 14);
+const macdData = calculateMACD(reqOldData, 12, 26, 9);
+candleSeries.setData(reqOldData);
+lineSeries.setData(reqOldData);
+macdSeries.setData(macdData.MACDLine);
+rsiSeries.setData(rsiData);
+smaSeries.setData(smaData);
+emaSeries.setData(emaData);
 socket.on("stockData", (data) => {
   if (stockNum == data.stockNum) {
     const newData = data.data.map((stockData, i) => {
-      const timeInSeconds = Math.floor(Date.now() / 1000) + i * 15;
+      const timeInSeconds = Math.floor(Date.now() / 1000) + i * 10;
       return {
         time: timeInSeconds,
         open: stockData.OPEN,
@@ -150,16 +179,17 @@ socket.on("stockData", (data) => {
         close: stockData.CLOSE,
       };
     });
-
     const smaData = calculateSMA(newData, 14);
     const emaData = calculateEMA(newData, 14);
-    const rsiData = calculateRSI(newData, 14); // 14 is the window size for the RSI
-    const macdData = calculateMACD(newData, 12, 26, 9); // 12, 26, 9 are the typical periods used for MACD
+    const rsiData = calculateRSI(newData, 14);
+    const macdData = calculateMACD(newData, 12, 26, 9);
     candleSeries.setData(newData);
     lineSeries.setData(newData);
     macdSeries.setData(macdData.MACDLine);
-    rsiSeries.setData(rsiData); // 14 is the window size for the EMA
+    rsiSeries.setData(rsiData);
     smaSeries.setData(smaData);
-    emaSeries.setData(emaData); // 14 is the window size for the SMA
+    emaSeries.setData(emaData);
+    document.getElementById(`price`).innerText =
+      newData[newData.length - 1].close;
   }
 });

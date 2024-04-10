@@ -8,6 +8,7 @@ const date = moment();
 
 const Student = require("../models/student");
 const Admin = require("../models/admin");
+const OldStockData = require("../models/oldStockData");
 
 const sentData = {};
 const indices = {};
@@ -15,14 +16,13 @@ const intervals = {};
 
 module.exports.getChart = async (req, res, next) => {
   const io = req.app.get("socketio");
-
-  const stocks = await Stock.find({});
+  const stocks = await Stock.find();
   for (let stock of stocks) {
     const stockNum = stock.stockNum;
     if (!intervals[stockNum]) {
       indices[stockNum] = 0;
       sentData[stockNum] = [];
-      intervals[stockNum] = setInterval(() => {
+      intervals[stockNum] = setInterval(async () => {
         if (indices[stockNum] >= stock.stockdata.length) {
           clearInterval(intervals[stockNum]);
           delete intervals[stockNum];
@@ -30,65 +30,16 @@ module.exports.getChart = async (req, res, next) => {
         }
         const data = stock.stockdata.slice(0, indices[stockNum] + 1);
         sentData[stockNum] = data;
-        // console.log(`Emitting data for stock ${stockNum}:`, data);
+        const latestClosePrice = data[data.length - 1].CLOSE;
+        await Stock.updateOne({ stockNum }, { price: latestClosePrice });
         io.emit("stockData", { stockNum, data });
 
         indices[stockNum]++;
       }, 10000);
     }
   }
-
-  io.on("connection", (socket) => {
-    socket.on("join", (stockNum) => {
-      socket.join(stockNum);
-      if (sentData[stockNum]) {
-        socket.emit("stockData", { stockNum, data: sentData[stockNum] });
-      }
-    });
-  });
-
   next();
 };
-
-// const indices = {};
-// const intervals = {};
-// module.exports.getChart = async (req, res, next) => {
-//   const io = req.app.get("socketio");
-//   io.on("connection", (socket) => {
-//     socket.on("join", async (data) => {
-//       socket.join(data);
-
-//       const stock = await Stock.findOne({ stockNum: data });
-//       if (!stock) {
-//         return;
-//       }
-
-//       if (!intervals[data]) {
-//         indices[data] = 0;
-//         intervals[data] = setInterval(() => {
-//           if (indices[data] >= stock.stockdata.length) {
-//             clearInterval(intervals[data]);
-//             delete intervals[data];
-//             return;
-//           }
-//           io.to(data).emit(
-//             "stockData",
-//             stock.stockdata.slice(0, indices[data] + 1)
-//           );
-
-//           indices[data]++;
-//         }, 15000);
-//       } else {
-//         socket.emit("stockData", stock.stockdata.slice(0, indices[data] + 1));
-//       }
-//     });
-//   });
-//   next();
-//   // res.render("chart", {
-//   //   title: "Chart",
-//   //   stockNum,
-//   // });
-// };
 
 module.exports.makeStock = async (req, res, next) => {
   // await new Stock({
@@ -158,7 +109,7 @@ module.exports.profile = async (req, res) => {
         return (price = price + stock.stockid.price * stock.quantity);
       });
     let totalAmount = price + student.amount;
-    try{
+    try {
       await Student.findOneAndUpdate(
         { _id: student._id },
         { totalAmount: totalAmount },
@@ -167,7 +118,7 @@ module.exports.profile = async (req, res) => {
           upsert: true,
         }
       );
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
     pl =
@@ -192,30 +143,38 @@ module.exports.profile = async (req, res) => {
 };
 
 module.exports.stockSingle = async (req, res, next) => {
-  const user = req.session.StudentId;
-  const leader = await Admin.find();
-  const check = leader[0].Start;
-  if (user) {
-    const currentDate = date.format("dddd, MMMM Do YYYY");
+  try {
+    const oldStock = await OldStockData.findOne({
+      stockNum: req.params.stockid,
+    });
+    const oldData = JSON.stringify(oldStock.stockdata);
+    const user = req.session.StudentId;
+    const leader = await Admin.find();
+    const check = leader[0].Start;
+    if (user) {
+      const currentDate = date.format("dddd, MMMM Do YYYY");
 
-    const stock = await Stock.find({ stockNum: req.params.stockid });
-    const student = await Student.findById(user);
-    const stocks = student.userStock.stocks;
-    if (check) {
-      res.render("individual-stock", {
-        date: currentDate,
-        data: stock[0],
-        stocks: stocks,
-        num: req.params.stockid,
-      });
+      const stock = await Stock.find({ stockNum: req.params.stockid });
+      const student = await Student.findById(user);
+      const stocks = student.userStock.stocks;
+      if (check) {
+        res.render("individual-stock", {
+          date: currentDate,
+          data: stock[0],
+          stocks: stocks,
+          num: req.params.stockid,
+          oldData,
+        });
+      } else {
+        res.render("start");
+      }
     } else {
-      res.render("start");
+      res.redirect("/login");
     }
-  } else {
-    res.redirect("/login");
+  } catch (err) {
+    console.log(err);
   }
 };
-2;
 
 module.exports.leader = async (req, res, next) => {
   const user = req.session.StudentId;
