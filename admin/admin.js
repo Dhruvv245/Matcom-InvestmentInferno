@@ -60,13 +60,12 @@ router
 router
   .route("/test4")
   .get(async (req, res, next) => {
+    console.log(req.body);
+
     res.render("createMessage");
   })
   .post(async (req, res, next) => {
     console.log(req.body);
-    const data = req.body;
-    const io = req.app.get("socketio");
-    io.emit("message", {data: data});
     const stockNum = req.body.stockNum;
     const filter = { stockNum: stockNum };
     const update = { message: req.body.message };
