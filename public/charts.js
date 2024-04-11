@@ -1,8 +1,7 @@
 import "@babel/polyfill";
 import { createChart, CrosshairMode } from "lightweight-charts";
 import io from "socket.io-client";
-import  axios  from 'axios';
-
+import axios from "axios";
 
 function calculateSMA(data, windowSize) {
   let rAvg = [];
@@ -159,6 +158,8 @@ const reqOldData = oldDataJson.map((stockData, i) => {
     close: stockData.CLOSE,
   };
 });
+console.log(reqOldData);
+let newDataStore = [];
 const smaData = calculateSMA(reqOldData, 14);
 const emaData = calculateEMA(reqOldData, 14);
 const rsiData = calculateRSI(reqOldData, 14);
@@ -172,7 +173,8 @@ emaSeries.setData(emaData);
 socket.on("stockData", (data) => {
   if (stockNum == data.stockNum) {
     const newData = data.data.map((stockData, i) => {
-      const timeInSeconds = Math.floor(Date.now() / 1000) + i * 10;
+      const timeInSeconds =
+        Math.floor(Date.now() / 1000) + (i + reqOldData.length) * 10;
       return {
         time: timeInSeconds,
         open: stockData.OPEN,
@@ -181,35 +183,51 @@ socket.on("stockData", (data) => {
         close: stockData.CLOSE,
       };
     });
-    const smaData = calculateSMA(newData, 14);
-    const emaData = calculateEMA(newData, 14);
-    const rsiData = calculateRSI(newData, 14);
-    const macdData = calculateMACD(newData, 12, 26, 9);
-    candleSeries.setData(newData);
-    lineSeries.setData(newData);
-    macdSeries.setData(macdData.MACDLine);
-    rsiSeries.setData(rsiData);
-    smaSeries.setData(smaData);
-    emaSeries.setData(emaData);
-    document.getElementById(`price`).innerText =
-      newData[newData.length - 1].close;
+    // Check if the new stock data is already in the newData array
+    const newDataTimes = newDataStore.map((item) => item.time);
+    const uniqueNewStockData = newData.filter(
+      (item) => !newDataTimes.includes(item.time)
+    );
+    console.log("unique", uniqueNewStockData);
+    newDataStore = newDataStore.concat(uniqueNewStockData);
+    const combinedData = [...reqOldData, ...newDataStore].sort(
+      (a, b) => a.time - b.time
+    );
+
+    console.log("newData", newDataStore);
+    console.log("combined", combinedData);
+    const smaData = calculateSMA(combinedData, 14);
+    const emaData = calculateEMA(combinedData, 14);
+    const rsiData = calculateRSI(combinedData, 14);
+    const macdData = calculateMACD(combinedData, 12, 26, 9);
+    if (uniqueNewStockData[1]) {
+      candleSeries.update(uniqueNewStockData[1]);
+      lineSeries.update(uniqueNewStockData[1]);
+      macdSeries.setData(macdData.MACDLine);
+      rsiSeries.setData(rsiData);
+      smaSeries.setData(smaData);
+      emaSeries.setData(emaData);
+      document.getElementById(`price`).innerText = uniqueNewStockData[1].close;
+    }
   }
 });
 
 socket.on("message", (data) => {
+  console.log(data.data);
   document.getElementById("message-content").innerText = data.data.message;
-})
+});
 
-document.getElementById("buy-tip").addEventListener('click', async () => {
+document.getElementById("buy-tip").addEventListener("click", async () => {
   await axios({
-    method: 'PATCH',
+    method: "PATCH",
     url: `/stock/tips/`,
   });
+  console.log("hello");
   document.getElementById("tips-button").style.display = "none";
   document.getElementById("tip-message").style.display = "block";
 
   setTimeout(() => {
     document.getElementById("tip-message").style.display = "none";
     document.getElementById("tips-button").style.display = "block";
-  }, 10000);
+  }, 7000);
 });
