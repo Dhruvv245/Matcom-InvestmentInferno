@@ -24959,11 +24959,7 @@ document.getElementById("buy-tip").addEventListener("click", /*#__PURE__*/_async
         _context.next = 2;
         return (0, _axios.default)({
           method: "PATCH",
-<<<<<<< HEAD
-          url: "/stock/tips/"
-=======
           url: "http://localhost:8080/stock/tips/"
->>>>>>> b117bb42c401463bcf833a3cb780d7b56c8d47fc
         });
       case 2:
         console.log("hello");
@@ -24972,11 +24968,7 @@ document.getElementById("buy-tip").addEventListener("click", /*#__PURE__*/_async
         setTimeout(function () {
           document.getElementById("tip-message").style.display = "none";
           document.getElementById("tips-button").style.display = "block";
-<<<<<<< HEAD
         }, 7000);
-=======
-        }, 5000);
->>>>>>> b117bb42c401463bcf833a3cb780d7b56c8d47fc
       case 6:
       case "end":
         return _context.stop();
@@ -25008,11 +25000,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "57936" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64275" + '/');
->>>>>>> b117bb42c401463bcf833a3cb780d7b56c8d47fc
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
