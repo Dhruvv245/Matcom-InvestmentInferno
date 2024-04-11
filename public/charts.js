@@ -197,21 +197,19 @@ socket.on("stockData", (data) => {
 });
 
 socket.on("message", (data) => {
-  console.log(data.data);
   document.getElementById("message-content").innerText = data.data.message;
 })
 
 document.getElementById("buy-tip").addEventListener('click', async () => {
   await axios({
     method: 'PATCH',
-    url: `http://localhost:8080/stock/tips/`,
+    url: `/stock/tips/`,
   });
-  console.log("hello");
   document.getElementById("tips-button").style.display = "none";
   document.getElementById("tip-message").style.display = "block";
 
   setTimeout(() => {
     document.getElementById("tip-message").style.display = "none";
     document.getElementById("tips-button").style.display = "block";
-  }, 5000);
+  }, 10000);
 });

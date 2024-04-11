@@ -5,7 +5,6 @@ const stockPrice = () => {
   let value = (Math.random() * 70 - change).toFixed(2);
   let price = document.getElementById("price");
   price.innerHTML = exact - value;
-  console.log(value);
   return value;
 };
 

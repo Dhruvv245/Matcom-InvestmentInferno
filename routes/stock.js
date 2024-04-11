@@ -19,24 +19,26 @@ module.exports.getChart = async (req, res, next) => {
   const stocks = await Stock.find();
   for (let stock of stocks) {
     const stockNum = stock.stockNum;
-    if (!intervals[stockNum]) {
-      indices[stockNum] = 0;
-      sentData[stockNum] = [];
-      intervals[stockNum] = setInterval(async () => {
-        if (indices[stockNum] >= stock.stockdata.length) {
-          clearInterval(intervals[stockNum]);
-          delete intervals[stockNum];
-          return;
-        }
-        const data = stock.stockdata.slice(0, indices[stockNum] + 1);
-        sentData[stockNum] = data;
-        const latestClosePrice = data[data.length - 1].CLOSE;
-        await Stock.updateOne({ stockNum }, { price: latestClosePrice });
-        io.emit("stockData", { stockNum, data });
-
-        indices[stockNum]++;
-      }, 10000);
+    if (intervals[stockNum]) {
+      clearInterval(intervals[stockNum]);
+      delete intervals[stockNum];
     }
+    indices[stockNum] = 0;
+    sentData[stockNum] = [];
+    intervals[stockNum] = setInterval(async () => {
+      if (indices[stockNum] >= stock.stockdata.length) {
+        clearInterval(intervals[stockNum]);
+        delete intervals[stockNum];
+        return;
+      }
+      const data = stock.stockdata.slice(0, indices[stockNum] + 1);
+      sentData[stockNum] = data;
+      const latestClosePrice = data[data.length - 1].CLOSE;
+      await Stock.updateOne({ stockNum }, { price: latestClosePrice });
+      io.emit("stockData", { stockNum, data });
+
+      indices[stockNum]++;
+    }, 10000);
   }
   next();
 };
@@ -122,9 +124,9 @@ module.exports.profile = async (req, res) => {
     }
     pl =
       Math.sqrt(
-        (student.amount + price - 20000) * (student.amount + price - 20000)
-      ) / 200;
-    pl2 = (student.amount + price - 20000) / 200;
+        (student.amount + price - 200000) * (student.amount + price - 200000)
+      ) / 2000;
+    pl2 = (student.amount + price - 200000) / 2000;
     if (check) {
       res.render("profile", {
         data: student,

@@ -20,6 +20,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const cors = require("cors");
 const session = require("express-session");
 const { makeStock } = require("./routes/stock");
+const compression = require("compression");
 
 const stockPrice = () => {
   const date = new Date();
@@ -79,7 +80,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
+app.use(compression());
 const sessionConfig = {
   secret: "thisshouldbeabettersecret!",
   resave: false,
@@ -174,8 +175,6 @@ app.patch("/stock/tips", async (req, res) => {
       io.emit("message", {
         data: { message: "You Don't Have Enough Money For This Service" },
       });
-      // res.render("error");
-      console.log("hello");
       res.redirect("/individual-stock");
       return;
     } else {
