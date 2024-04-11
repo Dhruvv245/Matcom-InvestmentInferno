@@ -24959,7 +24959,7 @@ document.getElementById("buy-tip").addEventListener("click", /*#__PURE__*/_async
         _context.next = 2;
         return (0, _axios.default)({
           method: "PATCH",
-          url: "/stock/tips/"
+          url: "http://localhost:8080/stock/tips/"
         });
       case 2:
         console.log("hello");
