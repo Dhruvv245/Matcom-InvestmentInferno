@@ -220,7 +220,7 @@ socket.on("message", (data) => {
 document.getElementById("buy-tip").addEventListener("click", async () => {
   await axios({
     method: "PATCH",
-    url: `/stock/tips/`,
+    url: `http://localhost:8080/stock/tips/`,
   });
   console.log("hello");
   document.getElementById("tips-button").style.display = "none";
